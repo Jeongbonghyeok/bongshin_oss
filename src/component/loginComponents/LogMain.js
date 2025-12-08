@@ -1,6 +1,10 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {useState, useRef, useEffect} from 'react';
+import './Log.css';
+
+
 import AddModal from './AddModal';
+import UpdateModal from './UpdateModal';
 
 
 const BASE_URL = "https://693133bc11a8738467cda490.mockapi.io/information";
@@ -51,17 +55,18 @@ export default function LogMain(){
           setInputId("");
           setInputPw("");
 
-          navigate(`../MainComponents/Main.js/${user.userId}`, {
+          navigate(`/main/${user.id}`, {
             state: { user }, 
           });
         } catch (err) {
-          console.error(err);
+          console.error(err); 
           alert("통신 중 오류가 발생했습니다.");
         }
     };
     
     return(<>  
-        <div>
+        <br/><br/><br/>
+        <div className="mt-5">
             <h1 className="justify-content-center mt-5">로그인</h1>
         </div>
         <div className="container mx-auto">
@@ -69,16 +74,17 @@ export default function LogMain(){
                 <form className="col-6 row mt-5">
                     <input className="form-control col-12 mb-3" id='loginId' type='text' placeholder="ID" value={inputId} onChange={(e)=>{setInputId(e.target.value)}}/><br/><br/>
                     <input className = "form-control col-12 mb-3" id='loginPw' type='password' placeholder='password' value={inputPw} onChange={(e)=>{setInputPw(e.target.value)}}/>
-                    <input type="submit" className="btn btn-primary col-12" value="login" onClick={isLogIn}/>
+                    <input type="submit"  className="btn btn-primary col-12" value="login" onClick={isLogIn}/>
                 </form>
                 <div className ="row justify-content-center mt-4">
                     <div className="col-6 row">
-                        <p className="col-6"  data-bs-toggle="modal" data-bs-target="#exampleModal1" style={{color:"gray"}}>회원가입</p>
-                        <p className="col-6" style={{color:"gray"}}>아이디 / 비밀번호 찾기</p>
+                        <p className="col-6 ment"  data-bs-toggle="modal" data-bs-target="#exampleModal1" >회원가입</p>
+                        <p className="col-6 ment"  data-bs-toggle="modal" data-bs-target="#exampleModal2" >아이디 / 비밀번호 찾기</p>
                     </div>
                 </div>
             </div>
         </div>
         <AddModal />
+        <UpdateModal/>
     </>);
 }

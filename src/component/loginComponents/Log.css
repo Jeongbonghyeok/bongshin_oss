@@ -1,0 +1,62 @@
+*{
+    background-color:  rgb(242, 235, 227);
+}
+
+.btn{
+    background-color: rgb(222, 197, 165);
+    border: 1px solid rgb(222, 197, 165);
+}
+.btn:hover{
+    background-color: rgb(192, 161, 121);
+  border: 1px solid rgb(197, 169, 133);
+}   
+
+.ment{
+    color:gray;
+}
+.ment:hover{
+    color:rgb(96, 95, 95);
+    font-weight: 500;
+}
+.custom-white-modal .modal-content {
+  background-color: #fff !important;
+}
+
+.site-header{
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-mark{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px; height: 45px;
+  border-radius: 10px;
+  background: #d9c5a6;
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.brand-name{
+  font-size: 25px;
+  font-weight: 800;
+  color: #2a2a2a;
+}
+
+.site-header{
+  background: rgb(242, 235, 227);   /* 원하는 헤더 배경 */
+  width: 100%;
+}
+
+
+
+/*mypage*/
+
