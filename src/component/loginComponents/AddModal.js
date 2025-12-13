@@ -1,4 +1,5 @@
 import{useState, useRef} from 'react';
+import './Log.css';
 
 const BASE_URL = "https://693133bc11a8738467cda490.mockapi.io/information";
 
@@ -122,13 +123,13 @@ export default function AddModal(){
 
     return(<>
         <div className="modal fade" id="exampleModal1">
-          <div className="modal-dialog">
+          <div className="modal-dialog custom-white-modal">
             <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel1">회원 가입</h1>
+              <div className="modal-header" style={{backgroundColor:"white"}}>
+                <h1 className="modal-title fs-5" id="exampleModalLabel1" style={{backgroundColor:"white"}}>회원 가입</h1>
               </div>
-              <div className="modal-body">
-                 <div className="d-flex flex-column align-items-start">
+              <div className="modal-body" style={{backgroundColor:"white"}}>
+                 <div className="d-flex flex-column align-items-start" style={{backgroundColor:"white"}}>
                       <input  className="form-control mb-2" ref={userIdRef}  value={userId}  type="text"  placeholder="enter id"  id="userId" 
                        onChange={(e) => {
                         const val = e.target.value;
@@ -139,7 +140,7 @@ export default function AddModal(){
                         }
                       }}/>
                       <p className="col-6 text-start"  style={ment === "" ? {} : isIdValid ? { color: "green" }: { color: "red" } }>{ment}</p>
-                      <button className="btn btn-primary mb-4"  onClick={idCheck}> 중복 검사</button>
+                      <button className="btn btn-primary mb-4"  onClick={idCheck} > 중복 검사</button>
                       <input className="form-control mb-4 " ref={passwordRef} value={password} type="text" placeholder="password" id="password" onChange={(e)=>{setPassword(e.target.value)}}/>
                       <input className="form-control mb-4" ref={nameRef} value={name} type="text" placeholder="name" id="name" onChange={(e)=>{setName(e.target.value)}}/>
                       <input className="form-control mb-4" ref={phoneNumberRef} value={phoneNumber} type="number" placeholder="phoneNumber" id="phoneNumber" onChange={(e)=>{setPhoneNumber(e.target.value)}}/>
