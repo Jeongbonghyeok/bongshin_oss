@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "./component/loginComponents/LogMain";
 import MainPage from './component/MainComponents/MainPage';
@@ -20,14 +19,14 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           {/* 로그인 성공 후 메인 페이지 : /main/유저id */}
-          
+
           {/* 도서추천 페이지 추가 */}
           <Route path="/recommend/:ID" element={<BookRecommendPage />} />
 
-         
-           <Route path="/main/:ID" element={<MainPage/>} />
 
-           <Route path="/mypage/:ID" element={<MyPage/>} />
+          <Route path="/main/:ID" element={<MainPage />} />
+
+          <Route path="/mypage/:ID" element={<MyPage />} />
           {/**
             <Route path="/main/:userId/books/:bookId" element={<BookDetailPage />} />
            * 
