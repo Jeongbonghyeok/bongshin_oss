@@ -16,6 +16,7 @@
       const [inputPw, setInputPw] = useState("");
       const [informations, setInformations] = useState([]);
       const navigate = useNavigate();
+      const commit =1;
 
       const isLogIn = async (e) => {
           e.preventDefault();
@@ -82,7 +83,7 @@
                       <div className="col-6 row justify-content-center login-links">
                           <p className="col-6 ment "  data-bs-toggle="modal" data-bs-target="#exampleModal1" >회원가입</p>
                           <p className="col-6 ment"  data-bs-toggle="modal" data-bs-target="#exampleModal2" >아이디 / 비밀번호 찾기</p>
-                      </div>
+                      </div >
                   </div>
               </div>
           </div>
