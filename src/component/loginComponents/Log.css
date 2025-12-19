@@ -56,6 +56,21 @@
   width: 100%;
 }
 
+/* 로그인 하단 링크(회원가입 / 아이디찾기) 가운데 정렬 */
+.login-links{
+  display: flex;
+  justify-content: center;
+  gap: 13rem;              /* 간격 */
+}
+
+.login-links .ment{
+  width: auto !important; /* col-6(50%) 무시 */
+  flex: 0 0 auto;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  background: transparent; /* * 배경색 영향 제거(선택) */
+}
 
 
 /*mypage*/

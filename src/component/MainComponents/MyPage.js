@@ -89,11 +89,9 @@ export default function MyPage(){
 
         const published = info.publishedDate || "출간일 정보 없음";
         const publisher = info.publisher || "출판사 정보 없음";
-        const categories = info.categories?.join(" / ") || "카테고리 정보 없음";
+        
         const pageCount = info.pageCount ? `${info.pageCount}p` : "페이지 정보 없음";
-        const rating = info.averageRating
-          ? `${info.averageRating} ⭐ (${info.ratingsCount || 0})`
-          : "평점 정보 없음";
+        
 
         const price =
           sale?.listPrice?.amount
@@ -122,7 +120,9 @@ export default function MyPage(){
                           미리보기
                         </a>
                       )}
+                        
                     </div>
+                    <button type="button" className="return-button  btn btn-primary" onClick={()=>bookReturn(book.id)}>반납</button>
                 </div>
                 <div className="col-6 mb-4 mt-4 p-3 book-info-pane justify-content-end">
                     <div className="book-card-body">
@@ -134,7 +134,7 @@ export default function MyPage(){
                           <p>출판사: {publisher}</p>
 
                           <p>페이지: {pageCount}</p>
-                          <p>평점: {rating}</p>
+                          
                           {price && <p>가격: {price}</p>}
                           {info.language && <p>언어: {info.language}</p>}
                         </div>
@@ -145,6 +145,38 @@ export default function MyPage(){
         );
     }
 
+    const bookReturn = async (bookId) => {
+      if (!ID) return;
+
+      // 1) 화면 상태 먼저 업데이트
+      const nextIds = bookIds.filter((id) => id !== bookId);
+      setBookIds(nextIds);   // bookIds가 바뀌면 useEffect로 bookDetails 다시 불러옴
+
+      try {
+        // 2) mock에서 현재 유저 정보 가져오기
+        const res = await fetch(`${MOCK_URL}/${ID}`);
+        if (!res.ok) throw new Error("failed to fetch user for return");
+      
+        const user = await res.json();
+      
+        // 3) books만 새 배열로 교체
+        const nextUser = { ...user, books: nextIds };
+      
+        // 4) PUT으로 mock에 반영
+        const putRes = await fetch(`${MOCK_URL}/${ID}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(nextUser),
+        });
+      
+        if (!putRes.ok) throw new Error("failed to update user books");
+      } catch (e) {
+        console.error("반납 처리 실패:", e);
+        // 실패 시 다시 원복하고 싶으면 여기서 setBookIds(bookIds) 같은 거 해도 됨
+      }
+    };
+
+
 
 
 
@@ -154,7 +186,7 @@ export default function MyPage(){
             <Link to={`/main/${ID}`} className="btn btn-primary col-1 m-2">뒤로가기</Link><br/>
             <Link to="/login" className="btn btn-primary col-1 m-2">로그아웃</Link>
         </div>
-        <div className="container mypage">
+        <div className="container mypage justify-content-center">
             <hr/>
             <div id="myInfor" className="justify-content-start">
                 <h2 className="text-start">내 정보</h2>
