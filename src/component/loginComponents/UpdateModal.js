@@ -54,7 +54,7 @@ export default function UpdateModal() {
       const res = await fetch( `${BASE_URL}?userId=${encodeURIComponent(userId)}`);
 
       if (!res.ok) {
-        alert("조회 중 오류가 발생했습니다.");
+        alert("존재하지 않는 아이디입니다.");
         return;
       }
 

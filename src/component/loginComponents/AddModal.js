@@ -148,7 +148,7 @@ export default function AddModal(){
               </div>
               <div className="modal-footer">
                 <button data-bs-dismiss="modal" className="btn btn-primary" onClick={mentEmpty}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={addNewObject} data-bs-dismiss="modal">Add Student</button>
+                <button type="button" className="btn btn-primary" onClick={addNewObject} data-bs-dismiss="modal">회원가입</button>
               </div>
             </div>
           </div>
