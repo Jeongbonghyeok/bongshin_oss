@@ -19,8 +19,8 @@ const BookDetailModal = ({ book, onClose, toggleWishlist, isWished, onRent, isRe
                         className="modal-image"
                     />
                 </div>
-                <div className="modal-info">
-                    <div className="modal-title">{book.volumeInfo.title}</div>
+                <div className="modal-info wrapper">
+                    <div className="modal-title p-1">{book.volumeInfo.title}</div>
                     <div className="modal-author">
                         {book.volumeInfo.authors?.join(", ")} 저 | {book.volumeInfo.publisher}
                     </div>

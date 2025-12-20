@@ -19,17 +19,17 @@ const LiveRanking = ({ books, openModal }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="live-ranking-label">실시간 추천도서 순위</div>
+            <div className="live-ranking-label p-1" style={{color:'gray'}}>실시간 추천도서 순위</div>
             <div
-                className="live-ranking-content"
+                className="live-ranking-content p-1"
                 onClick={() => openModal(books[liveRankIndex])}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: 'pointer', color:'gray'}}
             >
                 <span className="ranking-num">{liveRankIndex + 1}.</span>
                 {books[liveRankIndex]?.volumeInfo?.title || "로딩 중..."}
             </div>
 
-            {/* Dropdown */}
+            
             {isHovered && (
                 <div className="live-ranking-dropdown">
                     <div className="dropdown-header">실시간 추천도서 순위 TOP 10</div>

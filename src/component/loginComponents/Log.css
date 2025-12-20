@@ -52,26 +52,31 @@
 }
 
 .site-header{
-  background: rgb(242, 235, 227);   /* 원하는 헤더 배경 */
+  background: rgb(242, 235, 227);  
   width: 100%;
 }
 
-/* 로그인 하단 링크(회원가입 / 아이디찾기) 가운데 정렬 */
+
 .login-links{
   display: flex;
   justify-content: center;
-  gap: 13rem;              /* 간격 */
+  gap: 13rem;              
 }
 
 .login-links .ment{
-  width: auto !important; /* col-6(50%) 무시 */
+  width: auto !important; 
   flex: 0 0 auto;
   margin: 0;
   text-align: center;
   cursor: pointer;
-  background: transparent; /* * 배경색 영향 제거(선택) */
+  background: transparent; 
+}
+
+.mentComment{
+  font-size: 0.9rem;
+  margin-top: -10px;
+  background-color: white;
 }
 
 
-/*mypage*/
 

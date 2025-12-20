@@ -11,8 +11,8 @@ export default function MainPage(){
 
     return(<>
         <Header/>
-        <div className="row mt-5 m-5">
-            <Link to={`/mypage/${ID}`} className="btn btn-primary col-3 ml-5">마이페이지</Link>
+        <div className="row mt-5 m-5 justify-content-end">
+            <Link to={`/mypage/${ID}`} className="btn btn-primary col-2 me-5"> 마이페이지</Link>
         </div>
         <BookRecommendPage/>
         

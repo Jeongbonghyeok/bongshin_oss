@@ -108,7 +108,7 @@ export default function MyPage(){
                     <div className="book-thumb placeholder">No Image</div>
                   )}
 
-                   <div className="book-card-footer">
+                   <div className="book-card-footer justify-content-center ">
                       {info.infoLink && (
                         <a href={info.infoLink} target="_blank" rel="noreferrer" className="book-detail-link">
                           자세히 보기 
@@ -119,10 +119,11 @@ export default function MyPage(){
                         <a href={access.webReaderLink} target="_blank" rel="noreferrer" className="book-detail-link mt-2">
                           미리보기
                         </a>
-                      )}
+                      )}<br/>
+                      <button type="button" className="return-button btn btn-primary mt-2" onClick={()=>bookReturn(book.id)}>반납</button>  
                         
                     </div>
-                    <button type="button" className="return-button  btn btn-primary" onClick={()=>bookReturn(book.id)}>반납</button>
+                    
                 </div>
                 <div className="col-6 mb-4 mt-4 p-3 book-info-pane justify-content-end">
                     <div className="book-card-body">
@@ -148,21 +149,21 @@ export default function MyPage(){
     const bookReturn = async (bookId) => {
       if (!ID) return;
 
-      // 1) 화면 상태 먼저 업데이트
+      
       const nextIds = bookIds.filter((id) => id !== bookId);
-      setBookIds(nextIds);   // bookIds가 바뀌면 useEffect로 bookDetails 다시 불러옴
+      setBookIds(nextIds);  
 
       try {
-        // 2) mock에서 현재 유저 정보 가져오기
+        
         const res = await fetch(`${MOCK_URL}/${ID}`);
         if (!res.ok) throw new Error("failed to fetch user for return");
       
         const user = await res.json();
       
-        // 3) books만 새 배열로 교체
+       
         const nextUser = { ...user, books: nextIds };
       
-        // 4) PUT으로 mock에 반영
+       
         const putRes = await fetch(`${MOCK_URL}/${ID}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -172,7 +173,7 @@ export default function MyPage(){
         if (!putRes.ok) throw new Error("failed to update user books");
       } catch (e) {
         console.error("반납 처리 실패:", e);
-        // 실패 시 다시 원복하고 싶으면 여기서 setBookIds(bookIds) 같은 거 해도 됨
+        
       }
     };
 

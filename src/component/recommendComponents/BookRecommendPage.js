@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./BookRecommendPage.css";
 import Header from "../Header";
 
-// Sub-components
+
 import LiveRanking from "./LiveRanking";
 import CategorySidebar from "./CategorySidebar";
 import BookList from "./BookList";
@@ -14,7 +14,7 @@ import WishlistSidebar from "./WishlistSidebar";
 const API_KEY = "AIzaSyA1Oo9pmCtewgLXwy8fcxHpd4V9YXRzFKM";
 const MOCK_API = "https://693133bc11a8738467cda490.mockapi.io/information";
 
-// ✅ 대여목록 저장 필드 (Mock에 books로 저장중이면 "books"로 변경)
+
 const RENT_FIELD = "books";
 
 const CATEGORIES = [
@@ -46,28 +46,27 @@ function BookRecommendPage() {
   const [category, setCategory] = useState("종합");
   const [loading, setLoading] = useState(false);
 
-  // Modal & Selection
+
   const [selectedBook, setSelectedBook] = useState(null);
 
-  // Wishlist State
+  
   const [wishlist, setWishlist] = useState([]);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
 
-  // Delete & Toast State
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [toast, setToast] = useState(null);
 
-  // Dashboard Data
+  
   const [authorBooks, setAuthorBooks] = useState([]);
   const [mediaBooks, setMediaBooks] = useState([]);
   const [blackBooks, setBlackBooks] = useState([]);
 
-  // Rent State (✅ 이 배열이 Mock에 저장됨: "대여한 책 id 목록")
+ 
   const [rentedBooks, setRentedBooks] = useState([]);
   const [rentConfirmTarget, setRentConfirmTarget] = useState(null);
   const [confirmType, setConfirmType] = useState("RENT"); // 'RENT' or 'RETURN'
 
-  // ✅ X코드 방식(하이드레이션/덮어쓰기 방지)
+  
   const didMountRent = useRef(false);
   const rentHydrated = useRef(false);
 
@@ -102,7 +101,7 @@ function BookRecommendPage() {
     }
   };
 
-  // --- Mock: Load (hydrate) ---
+  
   const getMyInformation = async () => {
     if (!ID) return;
 
@@ -110,18 +109,18 @@ function BookRecommendPage() {
       const res = await fetch(`${MOCK_API}/${ID}`);
       const user = await res.json();
 
-      // ✅ RENT_FIELD 우선, 없으면 rentedBooks/books fallback
+      
       const rentedFromMock = user?.[RENT_FIELD] ?? user?.books ?? user?.rentedBooks ?? [];
 
 
       setRentedBooks(Array.isArray(rentedFromMock) ? rentedFromMock : []);
-      rentHydrated.current = true; // ✅ 이제부터 저장 허용
+      rentHydrated.current = true; 
     } catch (e) {
       console.error("유저 정보 로드 실패:", e);
     }
   };
 
-  // ✅ ID 바뀔 때 리셋 후 hydrate
+ 
   useEffect(() => {
     didMountRent.current = false;
     rentHydrated.current = false;
@@ -151,7 +150,7 @@ function BookRecommendPage() {
     }
   };
 
-  // ✅ rentedBooks 바뀌면 자동 저장 (확정 버튼: executeAction에서 setRentedBooks만 함)
+  
   useEffect(() => {
     if (!ID) return;
 
@@ -206,10 +205,10 @@ function BookRecommendPage() {
     }
   };
 
-  // --- Rent handlers (✅ 버튼은 여기로 연결하면 됨) ---
+  
   const isRented = (bookId) => rentedBooks.includes(bookId);
 
-  // ✅ "대여/반납 시작 버튼"에 연결할 함수 (모달 띄움)
+ 
   const handleRent = (book) => {
     if (!book?.id) return;
 
@@ -222,7 +221,7 @@ function BookRecommendPage() {
     }
   };
 
-  // ✅ "확정(네)" 버튼: setRentedBooks만 하고, 저장은 useEffect가 함
+
   const executeAction = () => {
     if (!rentConfirmTarget) return;
 
@@ -293,7 +292,7 @@ function BookRecommendPage() {
         </div>
       )}
 
-      {/* ✅ 여기 "네"가 확정 저장 트리거 */}
+      
       {rentConfirmTarget && (
         <div className="confirm-overlay">
           <div className="confirm-box rent-confirm-box">
@@ -349,7 +348,7 @@ function BookRecommendPage() {
           </p>
         </div>
 
-        {/* ✅ LiveRanking에서도 대여 버튼이 있다면 onRent/isRented로 연결 가능 */}
+        
         <LiveRanking
           books={books}
           openModal={openModal}
@@ -366,7 +365,7 @@ function BookRecommendPage() {
             onCategoryClick={handleCategoryClick}
           />
 
-          {/* ✅ BookList 내부 대여 버튼을 onRent(book)로 연결하면 됨 */}
+        
           <BookList
             books={books}
             loading={loading}
@@ -380,7 +379,7 @@ function BookRecommendPage() {
         </div>
         
 
-        {/* ✅ 섹션들도 대여 버튼이 있으면 동일하게 연결 */}
+       
         <AuthorSection
           books={authorBooks}
           openModal={openModal}
@@ -389,6 +388,7 @@ function BookRecommendPage() {
           onRent={handleRent}
           isRented={isRented}
         />
+        <br/><br/>
 
         <MediaSection
           books={mediaBooks}
@@ -398,8 +398,10 @@ function BookRecommendPage() {
           onRent={handleRent}
           isRented={isRented}
         />
+        <br/><br/>
 
         <BlackSection books={blackBooks} openModal={openModal} />
+        <br/><br/>
 
         <footer className="footer-section">
           2025_OSS _Team_BongShin<br />
@@ -407,7 +409,7 @@ function BookRecommendPage() {
         </footer>
       </main>
 
-      {/* ✅ 상세 모달의 대여 버튼은 내부에서 onRent(book) 호출만 하면 됨 */}
+      
       <BookDetailModal
         book={selectedBook}
         onClose={closeModal}
@@ -422,12 +424,11 @@ function BookRecommendPage() {
           <span className="wishlist-icon">♥</span>
         </div>
         <div className="wishlist-text-container">
-          <span className="wishlist-label">찜</span>
-          <span className="wishlist-count">{wishlist.length}</span>
+          <span className="wishlist-label p-2 border-radius" style={{color: 'gray'}}>찜 <span className="wishlist-count p-2">{wishlist.length}</span></span>
         </div>
       </button>
 
-      {/* ✅ 위시리스트 사이드바에서 대여 버튼도 onRent(book)로 연결 */}
+      
       <WishlistSidebar
         isOpen={isWishlistOpen}
         onClose={() => setIsWishlistOpen(false)}
